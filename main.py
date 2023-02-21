@@ -9,7 +9,7 @@ CONTACTS = [{"name":"Ingrid"}]
 @app.route('/')
 def index():
     documents = db.my_collection.find()
-    return {"documents": str(documents)}
+    return {"documents": str(list(documents))}
 
 @app.route('/hello')
 def hello():
