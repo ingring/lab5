@@ -1,13 +1,22 @@
-from flask import Flask, jsonify
+from flask import Flask, request
 import os
 
 app = Flask(__name__)
 
+CONTACTS = [{"name":"Ingrid"}]
 
 @app.route('/')
 def index():
-    return jsonify({"Choo Choo": "Welcome to your Flask app 🚅"})
+    return "hei"
 
+@app.route('/hello')
+def hello():
+    return "hello"
 
-if __name__ == '__main__':
-    app.run(debug=True, port=os.getenv("PORT", default=5000))
+@app.route('/contacts', methods=['POST'])
+def update_contact():
+    name = request.json['name']
+    contact = {"name":name}
+    CONTACTS.append(contact)
+
+app.run()
