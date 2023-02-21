@@ -1,5 +1,6 @@
 from flask import Flask, request
 import os
+from database import db
 
 app = Flask(__name__)
 
@@ -7,7 +8,8 @@ CONTACTS = [{"name":"Ingrid"}]
 
 @app.route('/')
 def index():
-    return "hei"
+    documents = db.my_collection.find()
+    return {"documents": documents}
 
 @app.route('/hello')
 def hello():
